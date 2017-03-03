@@ -144,6 +144,7 @@ add_example(train_shape_predictor_ex)
 add_example(using_custom_kernels_ex)
 add_gui_example(video_tracking_ex)
 add_example(xml_parser_ex)
+add_gui_example(test_tracking)
 
 
 if (DLIB_NO_GUI_SUPPORT)
