@@ -44,9 +44,15 @@ import sys
 import dlib
 from skimage import io
 
+'''
+input:
+path ext xmin ymin xmax ymax
+'''
+
 # Path to the video frames
-video_folder = os.path.join("..", "examples", "test_frames")
-#print sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4]
+# video_folder = os.path.join("..", "examples", "test_frames")
+video_folder = sys.argv[1]
+#print sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4], sys.argv[5], sys.argv[6]
 
 # Create the correlation tracker - the object needs to be initialized
 # before it can be used
@@ -54,7 +60,7 @@ tracker = dlib.correlation_tracker()
 
 win = dlib.image_window()
 # We will track the frames as we load them off of disk
-for k, f in enumerate(sorted(glob.glob(os.path.join(video_folder, "*.png")))):
+for k, f in enumerate(sorted( glob.glob( os.path.join(video_folder, "*."+sys.argv[2] ) ) )):
     #print("Processing Frame {}".format(k))
     img = io.imread(f)
 
@@ -63,8 +69,8 @@ for k, f in enumerate(sorted(glob.glob(os.path.join(video_folder, "*.png")))):
         # Start a track on the juice box. If you look at the first frame you
         # will see that the juice box is contained within the bounding
         # box (74, 67, 112, 153).
-        tracker.start_track(img, dlib.rectangle( int(sys.argv[1]),int(sys.argv[2]),\
-                            int(sys.argv[3]), int(sys.argv[4]) ))
+        tracker.start_track(img, dlib.rectangle( int(sys.argv[3]),int(sys.argv[4]),\
+                            int(sys.argv[5]), int(sys.argv[6]) ))
     else:
         # Else we just attempt to track from the previous frame
         tracker.update(img)
