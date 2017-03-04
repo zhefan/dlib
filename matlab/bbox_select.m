@@ -5,7 +5,15 @@ clc
 
 img_path = '../examples/test_frames/';
 ext = 'png';
-tracked_obj = get_tracked_pos('tide');
+obj_list = {'tide', 'waterpot', 'salt'};
+
+tracked_objs = cell(length(obj_list),1);
+
+for i = 1:length(obj_list)
+    disp(obj_list{i})
+    tracked_objs{i} = get_tracked_pos(obj_list{i}, img_path, ext);
+end
+
 
 function tracked_obj = get_tracked_pos(obj, img_path, ext)
 
