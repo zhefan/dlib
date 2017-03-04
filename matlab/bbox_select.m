@@ -2,8 +2,19 @@ close all
 clear
 clc
 
+
 img_path = '../examples/test_frames/';
-img_dir = dir([img_path '*.png']);
+ext = 'png';
+tracked_obj = get_tracked_pos('tide');
+
+function tracked_obj = get_tracked_pos(obj, img_path, ext)
+
+if nargin < 2
+    ext = 'png';
+    img_path = '../examples/test_frames/';
+end
+
+img_dir = dir([img_path '*.' ext]);
 
 first_img = imread([img_path img_dir(1).name]);
 figure, imshow(first_img);
@@ -33,4 +44,9 @@ for i =1:length(C)
 end
 if size(tracked_pos,1) ~= length(img_dir)
     error('size mismatch')
+end
+
+tracked_obj.name = obj;
+tracked_obj.pos = tracked_pos;
+
 end
