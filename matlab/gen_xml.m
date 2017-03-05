@@ -3,7 +3,7 @@ function gen_xml(tracked_objs, img_path, out_path, img_w, img_h)
 if nargin < 5
     img_w = 640;
     img_h = 360;
-    out_path = '';
+    out_path = '/home/zhefanye/Documents/datasets/ProgressLab/progress/Annotations/';
 end
 
 C = strsplit(img_path, '/');
@@ -44,8 +44,6 @@ for i = 1:size(tracked_objs{1}.pos, 1)
     for j = 1:length(tracked_objs)
         
         tracked_pos = tracked_objs{j}.pos(i,:);
-        line = input_file(i, :);
-        disp(line)
     
         % object
         thisElement = docNode.createElement('object');
@@ -53,7 +51,7 @@ for i = 1:size(tracked_objs{1}.pos, 1)
         
         % name
         name = docNode.createElement('name');
-        name.appendChild(docNode.createTextNode(tracked_objs(j).name));
+        name.appendChild(docNode.createTextNode(tracked_objs{j}.name));
         thisElement.appendChild(name);
         
         % bndbox
@@ -67,12 +65,12 @@ for i = 1:size(tracked_objs{1}.pos, 1)
         
         % ymin
         ymin = docNode.createElement('ymin');
-        ymin.appendChild(docNode.createTextNode( sprintf('%i', tracked_pos(3))));
+        ymin.appendChild(docNode.createTextNode( sprintf('%i', tracked_pos(2))));
         bndbox.appendChild(ymin);
         
         % xmax
         xmax = docNode.createElement('xmax');
-        xmax.appendChild(docNode.createTextNode( sprintf('%i', tracked_pos(2))));
+        xmax.appendChild(docNode.createTextNode( sprintf('%i', tracked_pos(3))));
         bndbox.appendChild(xmax);
         
         % ymax
