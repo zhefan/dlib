@@ -41,6 +41,7 @@ end
 
 tracked_obj.name = obj;
 tracked_obj.pos = tracked_pos;
+tracked_obj.img_dir = img_dir;
 
 close(h_temp)
 end

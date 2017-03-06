@@ -1,4 +1,4 @@
-function gen_xml(tracked_objs, img_path, out_path, img_w, img_h)
+function gen_xml(tracked_objs, img_path, img_w, img_h, out_path)
 
 if nargin < 5
     img_w = 640;
@@ -44,7 +44,7 @@ for i = 1:size(tracked_objs{1}.pos, 1)
     for j = 1:length(tracked_objs)
         
         tracked_pos = tracked_objs{j}.pos(i,:);
-    
+        
         % object
         thisElement = docNode.createElement('object');
         docRootNode.appendChild(thisElement);
@@ -78,9 +78,9 @@ for i = 1:size(tracked_objs{1}.pos, 1)
         ymax.appendChild(docNode.createTextNode( sprintf('%i', tracked_pos(4)) ));
         bndbox.appendChild(ymax);
         
-        
     end
-        xmlFileName = [out_path fname, '_', int2str(i), '.xml'];
-        xmlwrite(xmlFileName,docNode);
+    [~, fname, ~] = fileparts(tracked_objs{1}.img_dir(i).name);
+    xmlFileName = [out_path fname, '.xml'];
+    xmlwrite(xmlFileName,docNode);
     
 end
