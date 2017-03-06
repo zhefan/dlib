@@ -25,7 +25,7 @@ if isempty(str)
 end
 
 if strcmp(str, 'y')
-    fprintf('Writing annotations...')
+    fprintf('Writing annotations...\n')
     gen_xml(tracked_objs, img_path, img_w, img_h);
 end
 
